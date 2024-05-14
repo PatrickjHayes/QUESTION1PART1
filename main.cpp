@@ -3,18 +3,24 @@
 
 InterruptIn buttn(PC_13);
 
-    void buttn_fall() {
-    printf("button pressed\r\n");
+
+volatile int myflag = 0; 
+void buttn_fall(){
+        myflag = 1;
+
 }
-
-
+//Main code did not see buttn pressed in first code//
 // main() runs in its own thread in the OS
 int main()
 {
-    printf("This is my EMBED question 1 part 1\r\n");
+    printf("This is mbed os v%d \r\n", MBED_VERSION); 
 
 buttn.fall(&buttn_fall);
     while (true) {
+        if(myflag ==1){
+            printf("button pressed\r\n");
+            
+        };
 
     }
 }
